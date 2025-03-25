@@ -3,11 +3,24 @@ import { ApiService } from '../../services/api.service';
 import { Post } from '../../../model/post.interface';
 import { User } from '../../../model/user.interface';
 import { UserStore } from '../../store/user.store';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-post-list',
   standalone: false,
-  templateUrl: './post-list.component.html'
+  templateUrl: './post-list.component.html',
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('400ms ease-out', style({ transform: 'translateX(-100%)', opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class PostListComponent implements OnInit {
   readonly #userStore = inject(UserStore);
