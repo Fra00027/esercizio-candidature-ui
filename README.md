@@ -2,7 +2,14 @@
 
 ## Implementazione
 
-Questa applicazione Angular mostra una lista di post e dettagli dei post, implementando tutte le specifiche richieste e diversi miglioramenti opzionali. Di seguito è descritto cosa è stato implementato e dove.
+Questa applicazione Angular mostra una lista di post e dettagli dei post, implementando tutte le specifiche richieste e diversi miglioramenti opzionali.
+
+## Dipendenze Installate
+
+L'applicazione utilizza le seguenti librerie principali:
+- **Tailwind CSS**: Framework CSS utility-first per la creazione di design personalizzati
+- **daisyUI**: Libreria di componenti basata su Tailwind CSS
+- **NgRx**: Libreria per la gestione dello stato dell'applicazione basata sul pattern Redux
 
 ## Struttura del Progetto
 
@@ -27,8 +34,3 @@ src/
 │   └── shared/
 │       └── post-item/          # Componente standalone per singolo post
 ```
-
-## Funzionalità Implementate
-
-### Requisiti Base
-
