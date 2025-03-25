@@ -8,12 +8,14 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { PostItemComponent } from '../shared/post-item/post-item.component';
 import { ApiService } from './services/api.service';
 import { UserStore } from './store/user.store';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
     CoreComponent,
     NavbarComponent,
-    PostListComponent
+    PostListComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,

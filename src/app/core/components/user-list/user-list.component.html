@@ -1,0 +1,30 @@
+<!-- User List with Cards -->
+<div class="p-4">
+  <!-- User Cards Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let user of users()" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
+      <div class="card-body">
+        <h3 class="card-title">{{ user.name }}</h3>
+        <p class="text-sm opacity-70">
+          <span class="text-primary">&#64;</span>{{ user.username }}
+        </p>
+        <div class="flex flex-col gap-1 mt-2">
+          <p class="text-sm">
+            <span class="font-semibold">Email:</span> {{ user.email }}
+          </p>
+          <p class="text-sm">
+            <span class="font-semibold">Phone:</span> {{ user.phone }}
+          </p>
+          <p class="text-sm">
+            <span class="font-semibold">Website:</span> {{ user.website }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Loading State -->
+  <div *ngIf="users().length === 0" class="flex justify-center py-10">
+    <span class="loading loading-dots loading-lg"></span>
+  </div>
+</div>
