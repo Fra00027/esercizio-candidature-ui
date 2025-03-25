@@ -1,0 +1,21 @@
+<div class="post-item">
+  <div class="post-container">
+    <!-- Colored square with user initials -->
+    <div 
+      class="user-avatar" 
+      [ngStyle]="getColorStyle()" 
+      (click)="onSquareClick()"
+    >
+      {{ getUserInitials() }}
+    </div>
+    
+    <div class="post-content">
+      <!-- Post title and body -->
+      <h2 class="post-title">{{ post.title }}</h2>
+      <p class="post-body">{{ post.body }}</p>
+      
+      <!-- Username info -->
+      <p class="post-username" *ngIf="user">{{ user.username }}</p>
+    </div>
+  </div>
+</div>
