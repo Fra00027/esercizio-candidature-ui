@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { User } from '../../model/user.interface';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../model/post.interface';
@@ -10,14 +10,14 @@ import { Post } from '../../model/post.interface';
   templateUrl: './post-item.component.html'
 })
 export class PostItemComponent {
-  @Input() post!: Post;
-  @Input() user?: User;
+  post = input.required<Post>();
+  user = input<User>();
   @Output() squareClicked = new EventEmitter<{post: Post, user?: User}>();
 
   // Get user initials for display in the colored square
   getUserInitials(): string {
-    if (!this.user) return '';
-    const nameParts = this.user.name.split(' ');
+    if (!this.user()) return '';
+    const nameParts = this.user()?.name.split(' ') ?? 'non trovato';
     if (nameParts.length >= 2) {
       return (nameParts[0][0] + nameParts[1][0]).toUpperCase();
     }
@@ -27,18 +27,13 @@ export class PostItemComponent {
   // Generate a random color based on user ID for the square
   getColorStyle(): { [klass: string]: any } {
     if (!this.user) return {};
-    
-    // Generate color based on user ID to keep it consistent for the same user
-    const hue = ((this.user.id * 137.5) % 360); // Simple hash function to get a color
-    const saturation = 65;
-    const lightness = 55;
-    
+
     return {
-      'background-color': `hsl(${hue}, ${saturation}%, ${lightness}%)`
+      'background-color': `primary`
     };
   }
 
   onSquareClick() {
-    this.squareClicked.emit({post: this.post, user: this.user});
+    this.squareClicked.emit({post: this.post(), user: this.user()});
   }
 }

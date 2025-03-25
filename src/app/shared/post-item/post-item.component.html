@@ -11,11 +11,11 @@
     
     <div class="post-content">
       <!-- Post title and body -->
-      <h2 class="post-title">{{ post.title }}</h2>
-      <p class="post-body">{{ post.body }}</p>
+      <h2 class="post-title">{{ post().title }}</h2>
+      <p class="post-body">{{ post().body }}</p>
       
       <!-- Username info -->
-      <p class="post-username" *ngIf="user">{{ user.username }}</p>
+      <p class="post-username" *ngIf="user">{{ user()?.username ?? 'non trovato' }}</p>
     </div>
   </div>
 </div>

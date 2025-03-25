@@ -1,0 +1,33 @@
+<!-- Post Detail Card (when a post is selected) -->
+<div *ngIf="selectedPost" class="card bg-base-200 shadow-xl mb-6">
+  <div class="card-body">
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="card-title">{{ selectedPost.user?.name }}</h2>
+        <p class="text-sm opacity-70">{{ selectedPost.user?.username }}</p>
+      </div>
+      <button class="btn btn-sm btn-circle btn-ghost" (click)="closeDetail()">
+        ✕
+      </button>
+    </div>
+    <h3 class="text-xl font-semibold mt-2">{{ selectedPost.post.title }}</h3>
+    <p>{{ selectedPost.post.body }}</p>
+  </div>
+</div>
+
+<!-- Post List -->
+<div class="space-y-4">
+  <div *ngFor="let post of posts; let i = index">
+    <app-post-item 
+      [post]="post" 
+      [user]="getUserForPost(post)" 
+      (squareClicked)="onPostSelected({post: post, user: getUserForPost(post)})"
+    ></app-post-item>
+    <div *ngIf="i < posts.length - 1" class="border-b border-neutral-content opacity-20 my-4"></div>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="posts.length === 0" class="flex justify-center py-10">
+  <span class="loading loading-dots loading-lg"></span>
+</div>

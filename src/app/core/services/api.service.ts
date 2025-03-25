@@ -4,9 +4,7 @@ import { Observable, forkJoin, map } from 'rxjs';
 import { User } from '../../model/user.interface';
 import { Post } from '../../model/post.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
   private baseUrl = 'https://jsonplaceholder.typicode.com';
 
