@@ -1,12 +1,10 @@
-<div class="navbar bg-primary text-primary-content shadow-lg mb-4">
+<div class="navbar bg-primary text-primary-content shadow-lg">
   <div class="flex-1">
-    <a routerLink="/core" class="btn btn-ghost text-xl">Post Explorer</a>
+    <a routerLink="/core/post-list" class="btn btn-ghost text-xl">Post Explorer</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      <li>
-        <a [routerLink]="['/core/post-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Post List</a>
-      </li>
+      <li><a routerLink="/core/post-list" routerLinkActive="active">Posts</a></li>
     </ul>
   </div>
 </div>

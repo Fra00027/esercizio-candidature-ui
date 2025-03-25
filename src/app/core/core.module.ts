@@ -16,9 +16,7 @@ import { ApiService } from './services/api.service';
   ],
   imports: [
     CommonModule,
-    RouterModule,
     RouterModule.forChild(coreRoutes),
-
     PostItemComponent
   ],
   providers: [ApiService]
