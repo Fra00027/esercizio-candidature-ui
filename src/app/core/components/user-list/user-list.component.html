@@ -4,20 +4,45 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <div *ngFor="let user of users()" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
       <div class="card-body">
-        <h3 class="card-title">{{ user.name }}</h3>
+        <h3 class="card-title">
+          <p class="bg-primary inline-block max-w-8 h-8 rounded-full text-center">
+            <span class="text-sm text-white font-bold">#{{ user.id }}</span>
+          </p>
+          {{ user.name | titlecase }}
+        </h3>
         <p class="text-sm opacity-70">
-          <span class="text-primary">&#64;</span>{{ user.username }}
+          <span class="text-primary">&#64;</span>{{ user.username | lowercase }}
         </p>
         <div class="flex flex-col gap-1 mt-2">
           <p class="text-sm">
-            <span class="font-semibold">Email:</span> {{ user.email }}
+            <span class="font-semibold">Email:</span> {{ user.email | lowercase }}
           </p>
           <p class="text-sm">
             <span class="font-semibold">Phone:</span> {{ user.phone }}
           </p>
           <p class="text-sm">
-            <span class="font-semibold">Website:</span> {{ user.website }}
+            <span class="font-semibold">Website:</span> {{ user.website | lowercase }}
           </p>
+          
+          <!-- Address Information -->
+          <div class="mt-2">
+            <p class="font-semibold text-sm mb-1">Address:</p>
+            <div class="ml-2">
+              <p class="text-xs">{{ user.address.street }}, {{ user.address.suite }}</p>
+              <p class="text-xs">{{ user.address.city | titlecase }}, {{ user.address.zipcode }}</p>
+              <p class="text-xs">Geo: {{ user.address.geo.lat | number:'1.6-6' }}, {{ user.address.geo.lng | number:'1.6-6' }}</p>
+            </div>
+          </div>
+          
+          <!-- Company Information -->
+          <div class="mt-2">
+            <p class="font-semibold text-sm mb-1">Company:</p>
+            <div class="ml-2">
+              <p class="text-xs"><span class="font-medium">Name:</span> {{ user.company.name | titlecase }}</p>
+              <p class="text-xs"><span class="font-medium">Motto:</span> "{{ user.company.catchPhrase | uppercase }}"</p>
+              <p class="text-xs"><span class="font-medium">BS:</span> {{ user.company.bs | titlecase }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
