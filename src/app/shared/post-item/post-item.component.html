@@ -15,7 +15,7 @@
         
         <!-- Author info -->
         <p class="text-xs text-gray-500 mt-1" *ngIf="user">
-          Pubblicato da: <span class="font-medium">{{ user.name || 'non trovato' }}</span>
+          Published by: <span class="font-medium">{{ user.name || 'not found' }}</span>
         </p>
         
         <!-- Post body - truncated -->
@@ -25,7 +25,7 @@
     
     <!-- Card actions -->
     <div class="card-actions justify-end mt-2">
-      <button class="btn btn-secondary" (click)="onSquareClick()">Leggi</button>
+      <button class="btn btn-secondary" (click)="onSquareClick()">Read</button>
     </div>
   </div>
 </div>

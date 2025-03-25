@@ -28,32 +28,32 @@
     <!-- Filters Section -->
     <div class="card bg-base-200 shadow-md mb-6">
       <div class="card-body p-4">
-        <h2 class="card-title text-lg mb-2">Filtri</h2>
+        <h2 class="card-title text-lg mb-2">Filters</h2>
         <form [formGroup]="filterForm" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Title Search Filter -->
             <div class="form-control">
               <label class="label">
-                <span class="label-text">Titolo</span>
+                <span class="label-text">Title</span>
               </label>
-              <input type="text" formControlName="titleSearch" placeholder="Cerca nel titolo..." class="input input-bordered w-full" />
+              <input type="text" formControlName="titleSearch" placeholder="Search in title..." class="input input-bordered w-full" />
             </div>
             
             <!-- Body Search Filter -->
             <div class="form-control">
               <label class="label">
-                <span class="label-text">Contenuto</span>
+                <span class="label-text">Content</span>
               </label>
-              <input type="text" formControlName="bodySearch" placeholder="Cerca nel contenuto..." class="input input-bordered w-full" />
+              <input type="text" formControlName="bodySearch" placeholder="Search in content..." class="input input-bordered w-full" />
             </div>
             
             <!-- User Filter -->
             <div class="form-control">
               <label class="label">
-                <span class="label-text">Utente</span>
+                <span class="label-text">User</span>
               </label>
               <select formControlName="userId" class="select select-bordered w-full">
-                <option [ngValue]="null">Tutti gli utenti</option>
+                <option [ngValue]="null">All users</option>
                 @for(user of users(); track $index) {
                   <option [ngValue]="user.id">{{user.name}}</option>
                 }
@@ -64,10 +64,10 @@
           <!-- Filter Stats and Reset Button -->
           <div class="flex justify-between items-center">
             <div class="text-sm">
-              <span class="font-medium">{{filteredPostCount}}</span> post trovati
+              <span class="font-medium">{{filteredPostCount}}</span> founded posts
             </div>
             <button type="button" class="btn btn-sm btn-outline" (click)="clearFilters()">
-              Cancella filtri
+              Clear filters
             </button>
           </div>
         </form>
