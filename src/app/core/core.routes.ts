@@ -11,11 +11,15 @@ export const coreRoutes: Routes = [
                 path: 'post-list',
                 component: PostListComponent
             },
+            {
+                path: '**',
+                redirectTo: 'post-list'
+            }
         ]
     },
     
     {
         path: '**',
-        redirectTo: '/core/post-list'
+        redirectTo: ''
     }
 ];
