@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Post } from '../../../model/post.interface';
 import { User } from '../../../model/user.interface';
@@ -24,6 +24,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class PostListComponent implements OnInit {
   readonly #userStore = inject(UserStore);
+  @ViewChild('postContainer') postContainer?: ElementRef;
 
   posts: Post[] = [];
   selectedPost: { post: Post, user?: User } | null = null;
@@ -45,6 +46,7 @@ export class PostListComponent implements OnInit {
   }
 
   onPostSelected(data: { post: Post, user?: User }): void {
+    this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.selectedPost = this.selectedPost?.post.id === data.post.id ? null : data;
   }
 
