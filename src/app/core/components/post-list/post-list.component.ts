@@ -72,10 +72,8 @@ export class PostListComponent implements OnInit {
   }
 
   onPostSelected(data: { post: Post, user?: User }): void {
-    //this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.selectedPost = this.selectedPost?.post.id === data.post.id ? null : data;
-
-    document.getElementById('my_modal_1')?.showPopover();
   }
 
   closeDetail(): void {
