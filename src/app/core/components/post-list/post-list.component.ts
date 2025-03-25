@@ -72,7 +72,9 @@ export class PostListComponent implements OnInit {
   }
 
   onPostSelected(data: { post: Post, user?: User }): void {
-    this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    if (window.innerWidth <= 768) {
+      this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
     this.selectedPost = this.selectedPost?.post.id === data.post.id ? null : data;
   }
 
