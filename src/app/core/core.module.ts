@@ -11,6 +11,8 @@ import { ApiService } from './services/api.service';
 import { UserStore } from './store/user.store';
 import { PostStore } from './store/post.store';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
+import { SnackbarComponent } from '../shared/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,9 @@ import { UserListComponent } from './components/user-list/user-list.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(coreRoutes),
-    PostItemComponent
-  ],
-  providers: [ApiService, UserStore, PostStore]
+    PostItemComponent,
+    SnackbarComponent
+],
+  providers: [ApiService, UserStore, PostStore, SnackbarService]
 })
 export class CoreModule { }
