@@ -3,7 +3,9 @@ import { ApiService } from '../../services/api.service';
 import { Post } from '../../../model/post.interface';
 import { User } from '../../../model/user.interface';
 import { UserStore } from '../../store/user.store';
+import { PostStore } from '../../store/post.store';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-post-list',
@@ -24,20 +26,44 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class PostListComponent implements OnInit {
   readonly #userStore = inject(UserStore);
+  readonly users = this.#userStore.getUsers;
+  readonly #postStore = inject(PostStore);
   @ViewChild('postContainer') postContainer?: ElementRef;
 
   posts: Post[] = [];
   selectedPost: { post: Post, user?: User } | null = null;
+  filterForm: FormGroup;
+  filteredPostCount = 0;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private fb: FormBuilder
+  ) {
+    this.filterForm = this.fb.group({
+      titleSearch: [''],
+      bodySearch: [''],
+      userId: [null]
+    });
+  }
 
   ngOnInit(): void {
     this.loadPosts();
+    
+    // sottoscrivi le modifiche
+    this.#postStore.filteredPosts$.subscribe(posts => {
+      this.posts = posts;
+      this.filteredPostCount = posts.length;
+    });
+    
+    // applica filtri
+    this.filterForm.valueChanges.subscribe(filters => {
+      this.applyFilters(filters);
+    });
   }
 
   loadPosts(): void {
     this.apiService.getPosts().subscribe(posts => {
-      this.posts = posts;
+      this.#postStore.setPosts(posts);
     });
   }
 
@@ -46,11 +72,36 @@ export class PostListComponent implements OnInit {
   }
 
   onPostSelected(data: { post: Post, user?: User }): void {
-    this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    //this.postContainer?.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.selectedPost = this.selectedPost?.post.id === data.post.id ? null : data;
+
+    document.getElementById('my_modal_1')?.showPopover();
   }
 
   closeDetail(): void {
     this.selectedPost = null;
+  }
+  
+  applyFilters(filters: any): void {
+    if (filters.titleSearch !== undefined) {
+      this.#postStore.setTitleSearchFilter(filters.titleSearch);
+    }
+    
+    if (filters.bodySearch !== undefined) {
+      this.#postStore.setBodySearchFilter(filters.bodySearch);
+    }
+    
+    if (filters.userId !== undefined) {
+      this.#postStore.setUserIdFilter(filters.userId);
+    }
+  }
+  
+  clearFilters(): void {
+    this.filterForm.reset({
+      titleSearch: '',
+      bodySearch: '',
+      userId: null
+    });
+    this.#postStore.clearFilters();
   }
 }
