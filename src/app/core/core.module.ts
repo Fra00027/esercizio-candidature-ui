@@ -7,6 +7,7 @@ import { coreRoutes } from './core.routes';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostItemComponent } from '../shared/post-item/post-item.component';
 import { ApiService } from './services/api.service';
+import { UserStore } from './store/user.store';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import { ApiService } from './services/api.service';
     RouterModule.forChild(coreRoutes),
     PostItemComponent
   ],
-  providers: [ApiService]
+  providers: [ApiService, UserStore]
 })
 export class CoreModule { }

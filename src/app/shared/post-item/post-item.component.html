@@ -1,21 +1,31 @@
-<div class="post-item">
-  <div class="post-container">
-    <!-- Colored square with user initials -->
-    <div 
-      class="user-avatar" 
-      [ngStyle]="getColorStyle()" 
-      (click)="onSquareClick()"
-    >
-      {{ getUserInitials() }}
+<div class="card w-full bg-base-100 shadow-xl mb-4 hover:shadow-2xl" >
+  <div class="card-body p-4 sm:p-6">
+    <div class="flex items-start gap-4">
+      <!-- User initials avatar -->
+      <div class="avatar avatar-placeholder">
+        <div class="bg-neutral text-neutral-content w-12 rounded-full">
+          <span>{{ getUserInitials() }}</span>
+        </div>
+      </div>
+      
+      <!-- Content area -->
+      <div class="flex-1">
+        <!-- Post title -->
+        <h2 class="card-title text-base sm:text-lg md:text-xl group-hover:text-primary transition-colors duration-200">{{ post().title }}</h2>
+        
+        <!-- Author info -->
+        <p class="text-xs text-gray-500 mt-1" *ngIf="user">
+          Pubblicato da: <span class="font-medium">{{ user.name || 'non trovato' }}</span>
+        </p>
+        
+        <!-- Post body - truncated -->
+        <p class="mt-3 text-sm line-clamp-2">{{ post().body }}</p>
+      </div>
     </div>
     
-    <div class="post-content">
-      <!-- Post title and body -->
-      <h2 class="post-title">{{ post().title }}</h2>
-      <p class="post-body">{{ post().body }}</p>
-      
-      <!-- Username info -->
-      <p class="post-username" *ngIf="user">{{ user()?.username ?? 'non trovato' }}</p>
+    <!-- Card actions -->
+    <div class="card-actions justify-end mt-2">
+      <button class="btn btn-secondary" (click)="onSquareClick()">Leggi</button>
     </div>
   </div>
 </div>

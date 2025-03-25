@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Post } from '../../../model/post.interface';
 import { User } from '../../../model/user.interface';
+import { UserStore } from '../../store/user.store';
 
 @Component({
   selector: 'app-post-list',
@@ -9,8 +10,9 @@ import { User } from '../../../model/user.interface';
   templateUrl: './post-list.component.html'
 })
 export class PostListComponent implements OnInit {
+  readonly #userStore = inject(UserStore);
+
   posts: Post[] = [];
-  users: User[] = [];
   selectedPost: { post: Post, user?: User } | null = null;
 
   constructor(private apiService: ApiService) {}
@@ -20,14 +22,13 @@ export class PostListComponent implements OnInit {
   }
 
   loadPosts(): void {
-    this.apiService.getPostsWithUsers().subscribe(data => {
-      this.posts = data.posts;
-      this.users = data.users;
+    this.apiService.getPosts().subscribe(posts => {
+      this.posts = posts;
     });
   }
 
   getUserForPost(post: Post): User | undefined {
-    return this.users.find(user => user.id === post.userId);
+    return this.#userStore.getUserByIds()(post.userId);
   }
 
   onPostSelected(data: { post: Post, user?: User }): void {
